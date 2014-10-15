@@ -1,0 +1,28 @@
+name: ubuntu14.04-ansible1.7-ruby2.1
+version: 0.0.1
+description: Ubuntu 14.04 with Ansible and Ruby
+inherits: tvaughan/ubuntu14.04@1.0.2
+type: main
+platform: ubuntu@14.04
+keywords:
+  - ubuntu
+  - 14.04
+  - trusty
+  - ansible
+  - ruby
+packages:
+  - ansible
+  - ruby
+script: |
+  sudo apt-get update
+  sudo apt-get install curl git build-essential libyaml-dev python-dev python-pip wget
+  sudo pip install paramiko PyYAML jinja2 httplib2 boto
+  git clone git://github.com/ansible/ansible.git 
+  cd ansible
+  git checkout v1.7.2
+  make install
+  sudo apt-get -y install software-properties-common python-software-properties
+  sudo apt-get update
+  sudo apt-add-repository ppa:brightbox/ruby-ng
+  sudo apt-get update
+  sudo apt-get install -y ruby2.1  sudo apt-get install python-software-properties
